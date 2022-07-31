@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "types",
+    "target": "ES6",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "strict": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "allowUmdGlobalAccess": true
+  },
+  "files": [
+    "./src/components/index.ts",
+    "./src/env.d.ts"
+  ],
+  "include": ["./src/**/*.d.ts"]
+}
