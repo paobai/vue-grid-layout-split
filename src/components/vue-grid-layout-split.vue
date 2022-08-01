@@ -4,7 +4,7 @@
       ref="gridLayout"
       v-model:layout="layout"
       :col-num="3"
-      :margin="[gridMargin, gridMargin]"
+      :margin="realGridMargin"
       :row-height="rowHeight"
       :is-draggable="draggable"
       :is-resizable="resizable"
@@ -31,9 +31,11 @@
           <div class="default-show-text">{{ item.i }}</div>
         </slot>
         <template v-if="editMode">
-          <div v-if="editMode" class="edit-mask" @click.stop=""></div>
+          <div v-if="editMode && editMask" class="edit-mask" @click.stop=""></div>
           <div class="delete-options" @click="deleteCard(item.i)">
-            delete
+            <slot name="delete-tip" :value="item">
+              <svg t="1659345568198" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13132" width="16" height="16"><path d="M972.8 204.8c28.16 0 51.2 23.04 51.2 51.2 0 28.16-23.04 51.2-51.2 51.2h-51.2v563.2c0 84.65-68.95 153.6-153.6 153.6H256c-84.65 0-153.6-68.95-153.6-153.6V307.2H51.2C23.04 307.2 0 284.16 0 256c0-28.16 23.04-51.2 51.2-51.2h256v-85.59C307.2 53.505 364.63 0 435.2 0h153.6c70.57 0 128 53.419 128 119.21v85.59h256z m-563.2-85.59v85.59h204.8v-85.59c0-7.935-10.923-16.81-25.6-16.81H435.2c-14.677 0-25.6 8.875-25.6 16.81zM819.2 870.4V307.2H204.8v563.2c0 28.16 22.955 51.2 51.2 51.2h512a51.2 51.2 0 0 0 51.2-51.2zM358.4 768c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z m307.2 0c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z" p-id="13133"></path></svg>
+            </slot>
           </div>
         </template>
       </grid-item>
@@ -76,6 +78,16 @@ export default {
     gridMargin: {
       type: Number,
       default: 20
+    },
+    editMask: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    realGridMargin(){
+      if (this.gridMargin instanceof Array) return this.gridMargin
+      else return [this.gridMargin, this.gridMargin]
     }
   },
   emits: ["changeLayout", "addCardEvent"],
@@ -105,41 +117,40 @@ export default {
     }
   },
   created() {
-    this.layout = this.transformLayoutToLocal(this.defaultLayout)
+    this.setLayout(this.defaultLayout)
   },
   methods: {
     transformLayoutToLocal(sourceLayout) {
       let res = JSON.parse(JSON.stringify(sourceLayout))
-      let transH = height => {
-        if (height < this.rowHeight) return 1
-        else {
-          return +((height - this.rowHeight) / (this.rowHeight + this.gridMargin) + 1).toFixed(2)
-        }
-      }
       res.forEach(e => {
-        e.h = transH(e.height)
+        e.h = this.transH(e.height)
         e.resetH = e.h
         e.i = e.id
         e.w = e.type === GridItemType.BIG ? 2 : 1
       })
       return res
     },
+    transH (height) {
+      if (height < this.rowHeight) return 1
+      else {
+        return +((height - this.rowHeight) / (this.rowHeight + this.realGridMargin[1]) + 1).toFixed(2)
+      }
+    },
     getLayout() {
       return JSON.parse(JSON.stringify(this.layout))
     },
-    addCard(i, h, gridItemType, options) {
-      let maxY = 0
-      this.layout.forEach(e => {
-        maxY = Math.max(maxY, e.y + e.h)
-      })
-      let dist = { ...options, w: 1, x: 2, y: maxY, h, resetH: h, i: i, type: gridItemType }
-      if (gridItemType === GridItemType.BIG) {
-        dist.w = 2
-        dist.x = 0
+    addCard(id, height, gridItemType, toTop = false, options) {
+      let y = -1
+      if (!toTop) {
+        this.layout.forEach(e => {
+          y = Math.max(y, e.y + e.h)
+        })
       }
+      let dist = { ...options, w: 1, x: 2, y: y, id: id, type: gridItemType, height: height }
+      if (gridItemType === GridItemType.BIG) dist.x = 0
       this.layout.push(...this.transformLayoutToLocal([dist]))
       this.$nextTick(() => {
-        this.checkHeight()
+        this.$refs.gridLayout.layoutUpdate()
         this.$nextTick(() => {
           this.changeLayoutEvent()
           this.$emit("addCardEvent")
@@ -215,7 +226,7 @@ export default {
       fixCardHeight(this.layout)
       if (JSON.stringify(this.layout) !== sourceLayout) {
         this.$nextTick(() => {
-          // this.$refs.gridLayout.layoutUpdate()
+          this.$refs.gridLayout.layoutUpdate()
         })
       }
     },
@@ -233,7 +244,6 @@ export default {
     },
     setLayout(sourceLayout) {
       this.layout = this.transformLayoutToLocal(sourceLayout)
-      this.checkHeight()
     }
   }
 }
@@ -243,7 +253,7 @@ export default {
 :deep(.vue-grid-layout) {
   height: 100%;
   width: 100%;
-  background: #eee;
+  //background: #eee;
   .vue-grid-item {
     &.vue-grid-placeholder {
       background-color: black;
@@ -252,7 +262,6 @@ export default {
       }
     }
     &:not(.vue-grid-placeholder) {
-      background: #ccc;
       border: 1px solid black;
     }
     .resizing {
@@ -266,6 +275,7 @@ export default {
       border: 2px solid #538dff;
     }
     .edit-mask {
+      background-color: rgb(94 115 159 / 20%);
       position: absolute;
       left: 0;
       top: 0;
@@ -281,9 +291,6 @@ export default {
       right: 0;
       padding: 10px;
       cursor: pointer;
-      &:hover {
-        color: #538dff;
-      }
     }
     .default-show-text {
       font-size: 24px;
