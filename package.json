@@ -2,13 +2,16 @@
   "name": "vue-grid-layout-split",
   "version": "1.0.0",
   "description": "A draggable layout",
-  "main": "dist/vue-grid-layout-split.es.js",
-  "module": "dist/vue-grid-layout-split.es.js",
+  "main": "lib/vue-grid-layout-split.es.js",
+  "module": "lib/vue-grid-layout-split.es.js",
   "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "vite",
-    "build": "vue-tsc --noEmit && yarn run build:types && vite build",
+    "preview": "cross-env BUILD_DIST=html vite preview --port 5050",
+    "build": "vue-tsc --noEmit && yarn run build:types && yarn run build:component && yarn run build:html",
+    "build:component": "cross-env BUILD_DIST=component vite build",
+    "build:html": "cross-env BUILD_DIST=html vite build",
     "build:types": "tsc --emitDeclarationOnly --declaration"
   },
   "author": "",
@@ -16,6 +19,7 @@
   "dependencies": {
     "@vitejs/plugin-vue": "^1.6.2",
     "@vitejs/plugin-vue-jsx": "^1.1.8",
+    "cross-env": "^7.0.3",
     "glob": "^7.1.6",
     "ts-node": "^10.1.0",
     "vite": "^2.5.6",
@@ -26,12 +30,12 @@
   "devDependencies": {
     "eslint": "^7.21.0",
     "eslint-plugin-vue": "^7.7.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "ts-node": "^10.1.0",
     "typescript": "^4.2.4",
     "vite-plugin-css-injected-by-js": "^1.5.1",
     "vue-tsc": "^0.38.4",
-    "yarn": "^1.22.19",
-    "less": "^4.1.2",
-    "less-loader": "^10.2.0"
+    "yarn": "^1.22.19"
   }
 }

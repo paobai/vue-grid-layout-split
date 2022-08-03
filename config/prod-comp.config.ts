@@ -12,7 +12,7 @@ const config: InlineConfig = {
   build: {
     cssCodeSplit: false,
     target: 'modules',
-    // outDir: 'es',
+    outDir: 'lib',
     emptyOutDir: true,
     minify: false,
     brotliSize: false,

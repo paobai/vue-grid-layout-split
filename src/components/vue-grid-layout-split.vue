@@ -1,6 +1,5 @@
 <template>
-  <div style="width: 100%; height: 100%">
-    <grid-layout
+  <grid-layout
       ref="gridLayout"
       v-model:layout="layout"
       :col-num="3"
@@ -13,8 +12,8 @@
       :use-css-transforms="true"
       @layout-updated="layoutUpdatedEvent"
       @layout-ready="layoutReadyEvent"
-    >
-      <grid-item
+  >
+    <grid-item
         v-for="item in layout"
         :key="item.i"
         :x="item.x"
@@ -26,21 +25,20 @@
         :class="`sk-grid-item-${item.i}`"
         @move="startMoveEvent"
         @moved="movedEvent"
-      >
-        <slot :value="item">
-          <div class="default-show-text">{{ item.i }}</div>
-        </slot>
-        <template v-if="editMode">
-          <div v-if="editMode && editMask" class="edit-mask" @click.stop=""></div>
-          <div class="delete-options" @click="deleteCard(item.i)">
-            <slot name="delete-tip" :value="item">
-              <svg t="1659345568198" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13132" width="16" height="16"><path d="M972.8 204.8c28.16 0 51.2 23.04 51.2 51.2 0 28.16-23.04 51.2-51.2 51.2h-51.2v563.2c0 84.65-68.95 153.6-153.6 153.6H256c-84.65 0-153.6-68.95-153.6-153.6V307.2H51.2C23.04 307.2 0 284.16 0 256c0-28.16 23.04-51.2 51.2-51.2h256v-85.59C307.2 53.505 364.63 0 435.2 0h153.6c70.57 0 128 53.419 128 119.21v85.59h256z m-563.2-85.59v85.59h204.8v-85.59c0-7.935-10.923-16.81-25.6-16.81H435.2c-14.677 0-25.6 8.875-25.6 16.81zM819.2 870.4V307.2H204.8v563.2c0 28.16 22.955 51.2 51.2 51.2h512a51.2 51.2 0 0 0 51.2-51.2zM358.4 768c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z m307.2 0c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z" p-id="13133"></path></svg>
-            </slot>
-          </div>
-        </template>
-      </grid-item>
-    </grid-layout>
-  </div>
+    >
+      <slot :value="item">
+        <div class="default-show-text">{{ item.i }}</div>
+      </slot>
+      <template v-if="editMode">
+        <div v-if="editMode && editMask" class="edit-mask" @click.stop=""></div>
+        <div class="delete-options" @click="deleteCard(item.i)">
+          <slot name="delete-tip" :value="item">
+            <svg t="1659345568198" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13132" width="16" height="16"><path d="M972.8 204.8c28.16 0 51.2 23.04 51.2 51.2 0 28.16-23.04 51.2-51.2 51.2h-51.2v563.2c0 84.65-68.95 153.6-153.6 153.6H256c-84.65 0-153.6-68.95-153.6-153.6V307.2H51.2C23.04 307.2 0 284.16 0 256c0-28.16 23.04-51.2 51.2-51.2h256v-85.59C307.2 53.505 364.63 0 435.2 0h153.6c70.57 0 128 53.419 128 119.21v85.59h256z m-563.2-85.59v85.59h204.8v-85.59c0-7.935-10.923-16.81-25.6-16.81H435.2c-14.677 0-25.6 8.875-25.6 16.81zM819.2 870.4V307.2H204.8v563.2c0 28.16 22.955 51.2 51.2 51.2h512a51.2 51.2 0 0 0 51.2-51.2zM358.4 768c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z m307.2 0c-28.16 0-51.2-23.04-51.2-51.2V512c0-28.16 23.04-51.2 51.2-51.2 28.16 0 51.2 23.04 51.2 51.2v204.8c0 28.16-23.04 51.2-51.2 51.2z" p-id="13133"></path></svg>
+          </slot>
+        </div>
+      </template>
+    </grid-item>
+  </grid-layout>
 </template>
 
 <script>
@@ -250,11 +248,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-:deep(.vue-grid-layout) {
+.vue-grid-layout {
   height: 100%;
   width: 100%;
-  //background: #eee;
-  .vue-grid-item {
+  :deep(.vue-grid-item) {
     &.vue-grid-placeholder {
       background-color: black;
       &.not-allowed {
