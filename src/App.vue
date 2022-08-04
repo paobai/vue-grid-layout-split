@@ -18,11 +18,11 @@
           <span style="margin-left: 30px">垂直间距：</span><input class="input-class" v-model.number="gridMarginCol">
         </div>
         <div class="right-wrapper">
-          <div class="bt-class" @click="addCard">增加卡片</div>
+          <div class="bt-class" @click="addCard">增加栅格元素</div>
           <span>高度：</span><input class="input-class" v-model.number="addHeight">
           <span style="margin-left: 38px">大小：</span>
-          <input type="radio" name="size" :value="0" v-model="addSize"/>小的卡片
-          <input type="radio" name="size" :value="1" v-model="addSize"/>大的卡片
+          <input type="radio" name="size" :value="0" v-model="addSize"/>小的元素
+          <input type="radio" name="size" :value="1" v-model="addSize"/>大的元素
           <span style="margin-left: 38px">方向：</span>
           <input type="radio" name="gender" :value="true" v-model="addDirect"/>从上增加
           <input type="radio" name="gender" :value="false" v-model="addDirect"/>从下增加
@@ -68,17 +68,17 @@ export default {
       addSize: 0,
       addDirect: true,
       defaultLayout: [
-        {id: 0, 'x': 0, 'y': 0, 'height': 100, type: GridItemType.SMALL},
-        {id: 1, 'x': 0, 'y': 0, 'height': 200, type: GridItemType.BIG},
-        {id: 2, 'x': 0, 'y': 0, 'height': 150, type: GridItemType.SMALL},
+        {id: 0, x: 0, y: 0, height: 100, type: GridItemType.SMALL},
+        {id: 1, x: 0, y: 0, height: 200, type: GridItemType.BIG},
+        {id: 2, x: 0, y: 0, height: 150, type: GridItemType.SMALL},
 
-        {id: 3, 'x': 1, 'y': 0, 'height': 250, type: GridItemType.SMALL},
-        {id: 4, 'x': 2, 'y': 0, 'height': 130, type: GridItemType.SMALL},
-        {id: 5, 'x': 1, 'y': 0, 'height': 100, type: GridItemType.SMALL},
+        {id: 3, x: 1, y: 0, height: 250, type: GridItemType.SMALL},
+        {id: 4, x: 2, y: 0, height: 130, type: GridItemType.SMALL},
+        {id: 5, x: 1, y: 0, height: 100, type: GridItemType.SMALL},
 
-        {id: 6, 'x': 2, 'y': 0, 'height': 100, type: GridItemType.SMALL},
-        {id: 7, 'x': 2, 'y': 0, 'height': 180, type: GridItemType.SMALL},
-        {id: 8, 'x': 2, 'y': 0, 'height': 100, type: GridItemType.SMALL}
+        {id: 6, x: 2, y: 0, height: 100, type: GridItemType.SMALL},
+        {id: 7, x: 2, y: 0, height: 180, type: GridItemType.SMALL},
+        {id: 8, x: 2, y: 0, height: 100, type: GridItemType.SMALL}
       ],
       currentLayout: []
     }
@@ -92,7 +92,12 @@ export default {
     },
     addCard () {
       let index = this.currentLayout.length + 1
-      this.$refs.gridLayoutSplit.addCard(index, this.addHeight, this.addSize, this.addDirect, {})
+      let obj = {
+        id: index,
+        height: this.addHeight,
+        type: this.addSize
+      }
+      this.$refs.gridLayoutSplit.addCard(obj, this.addDirect)
     }
   }
 }

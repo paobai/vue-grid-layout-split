@@ -67,14 +67,15 @@ export default {
     // ]
     defaultLayout: {
       type: Array,
-      default: () => []
+      default: () => [],
+      required: true
     },
     editMode: {
       type: Boolean,
       default: false
     },
     gridMargin: {
-      type: Number,
+      type: [Number, Array],
       default: 20
     },
     editMask: {
@@ -121,10 +122,14 @@ export default {
     transformLayoutToLocal(sourceLayout) {
       let res = JSON.parse(JSON.stringify(sourceLayout))
       res.forEach(e => {
+        e.x = e.x || 0
+        e.y = e.y || 0
+        e.type = e.type || GridItemType.SMALL
         e.h = this.transH(e.height)
         e.resetH = e.h
         e.i = e.id
         e.w = e.type === GridItemType.BIG ? 2 : 1
+        e.x = e.type === GridItemType.BIG ? 0 : e.x
       })
       return res
     },
@@ -137,15 +142,18 @@ export default {
     getLayout() {
       return JSON.parse(JSON.stringify(this.layout))
     },
-    addCard(id, height, gridItemType, toTop = false, options) {
+    addCard(obj, toTop = true) {
+      let id = obj.id
+      let height = obj.height
+      let type = obj.type || GridItemType.SMALL
       let y = -1
       if (!toTop) {
         this.layout.forEach(e => {
           y = Math.max(y, e.y + e.h)
         })
       }
-      let dist = { ...options, w: 1, x: 2, y: y, id: id, type: gridItemType, height: height }
-      if (gridItemType === GridItemType.BIG) dist.x = 0
+      let dist = { ...obj, w: 1, x: 2, y: y, id: id, type: type, height: height }
+      if (type === GridItemType.BIG) dist.x = 0
       this.layout.push(...this.transformLayoutToLocal([dist]))
       this.$nextTick(() => {
         this.$refs.gridLayout.layoutUpdate()
