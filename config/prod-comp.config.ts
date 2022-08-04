@@ -9,6 +9,7 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 const config: InlineConfig = {
   mode: 'production',
+  publicDir: false,
   build: {
     cssCodeSplit: false,
     target: 'modules',
