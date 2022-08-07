@@ -21,7 +21,7 @@
 
 ## 特性
 
-* 1比1模仿阿里云控制台模块布局方式
+* 参考阿里云控制台模块布局方式
 * 可拖拽
 * 可自定义栅格元素高度
 * 固定左右布局
@@ -94,11 +94,11 @@ new Vue({
 ```
 
 
-### 文档
+## 文档
 
-#### 属性
+### 属性
 
-##### vueGridLayoutSplit
+#### vueGridLayoutSplit
 
 * **defaultLayout**
 
@@ -180,7 +180,7 @@ new Vue({
   * SMALL: 小号元素
   * BIG: 大号元素
 
-#### 事件
+### 事件
 
 * **changeLayout**
 
@@ -189,7 +189,7 @@ new Vue({
 * **addCardEvent**
 
     调用新增方法`addCard`成功时的回调
-#### 方法
+### 方法
 
 * **getLayout**
   获取当前layout布局
@@ -226,8 +226,20 @@ new Vue({
       * required: `false`
       * default: `true`
   * 返回: 无
+### 插槽（slot）
+* **default**
 
+  元素内容
+  * 参数
+    * value
+      * type: `GridItemType`
 
+* **delete-tip**
+
+  右上角删除内容
+  * 参数
+    * value
+      * type: `GridItemType`
 ## 如何贡献
 
 请提交issue或PR。

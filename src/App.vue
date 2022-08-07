@@ -48,6 +48,9 @@
           </span>
           </div>
         </template>
+        <template v-slot:deleteTip="{value}">
+          序号：{{value.id}}
+        </template>
       </vue-grid-layout-split>
     </div>
   </div>
