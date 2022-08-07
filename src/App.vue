@@ -31,7 +31,7 @@
 
       <div class="item-wrapper">
         <div class="item-card" :key="item.i" v-for="item in currentLayout">
-          序号:{{item.id}}，x:{{item.x}}，y:{{item.y.toFixed(2)}}，w:{{item.w}}，h:{{item.h}}
+          序号:{{item.id}}，x:{{item.x}}，y:{{item.y.toFixed(2)}}，w:{{item.w}}，h:{{item.h.toFixed(2)}}
         </div>
       </div>
     </div>

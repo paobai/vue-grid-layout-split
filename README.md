@@ -44,44 +44,37 @@
 
 引入
 
+再main.js中使用组件
 ```javascript
-    import vueGridLayoutSplit, { GridItemType } from 'vue-grid-layout-split';
+import vueGridLayoutSplit from "vue-grid-layout-split";
+app.use(vueGridLayoutSplit);
 ```
 
-加入到 Vue 组件
-
- ```javascript
-    export default {
-        components: {
-            vueGridLayoutSplit: vueGridLayoutSplit
-        },
-    // ... data, methods, mounted (), etc.
-    }
-
-```
 ### 使用
 
 ```javascript
-  var defaultLayout = [
-    {id: 0, x: 0, y: 0, height: 100, type: GridItemType.SMALL},
-    {id: 1, x: 0, y: 0, height: 200, type: GridItemType.BIG},
-    {id: 2, x: 0, y: 0, height: 150, type: GridItemType.SMALL},
-  
-    {id: 3, x: 1, y: 0, height: 250, type: GridItemType.SMALL},
-    {id: 4, x: 2, y: 0, height: 130, type: GridItemType.SMALL},
-    {id: 5, x: 1, y: 0, height: 100, type: GridItemType.SMALL},
-  
-    {id: 6, x: 2, y: 0, height: 100, type: GridItemType.SMALL},
-    {id: 7, x: 2, y: 0, height: 180, type: GridItemType.SMALL},
-    {id: 8, x: 2, y: 0, height: 100, type: GridItemType.SMALL}
-  ];
-  
-  new Vue({
-      el: '#app',
-      data: {
-          defaultLayout: defaultLayout,
-      },
-  });
+import { GridItemType } from "vue-grid-layout-split";
+// ······
+var defaultLayout = [
+  {id: 0, x: 0, y: 0, height: 100, type: GridItemType.SMALL},
+  {id: 1, x: 0, y: 0, height: 200, type: GridItemType.BIG},
+  {id: 2, x: 0, y: 0, height: 150, type: GridItemType.SMALL},
+
+  {id: 3, x: 1, y: 0, height: 250, type: GridItemType.SMALL},
+  {id: 4, x: 2, y: 0, height: 130, type: GridItemType.SMALL},
+  {id: 5, x: 1, y: 0, height: 100, type: GridItemType.SMALL},
+
+  {id: 6, x: 2, y: 0, height: 100, type: GridItemType.SMALL},
+  {id: 7, x: 2, y: 0, height: 180, type: GridItemType.SMALL},
+  {id: 8, x: 2, y: 0, height: 100, type: GridItemType.SMALL}
+];
+
+new Vue({
+    el: '#app',
+    data: {
+        defaultLayout: defaultLayout,
+    },
+});
 ```
 
 

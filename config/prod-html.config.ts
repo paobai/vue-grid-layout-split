@@ -4,10 +4,10 @@ import vue from '@vitejs/plugin-vue';
 const config: InlineConfig = {
   mode: 'production',
   build:{
+    emptyOutDir: true,
     outDir: 'docs',
   },
   base: "./",
-  emptyOutDir: true,
   plugins: [vue()]
 };
 

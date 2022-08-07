@@ -46,7 +46,7 @@ import { GridLayout } from "vue-grid-layout"
 import { GridItem } from "vue-grid-layout"
 import { GridItemType, fixCardHeight } from "./help"
 export default {
-  name: "vueGridLayoutSplit",
+  name: "VueGridLayoutSplit",
   components: {
     GridLayout,
     GridItem
