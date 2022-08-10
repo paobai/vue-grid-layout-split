@@ -1,23 +1,23 @@
 <h1 align="center">vue-grid-layout-split</h1>
-
 <p align="center">
-<a href="https://www.npmjs.com/package/vue-grid-layout">
-<img src="https://img.shields.io/npm/v/vue-grid-layout.svg"/> 
-<img src="https://img.shields.io/npm/dm/vue-grid-layout.svg"/></a> 
-<a href="https://vuejs.org/"><img src="https://img.shields.io/badge/vue-2.2.x-brightgreen.svg"/></a>
+  <a href="https://github.com/paobai/vue-grid-layout-split" target="_blank" rel="noopener noreferrer">
+    <img width="100" src="https://paobai.github.io/vue-grid-layout-split/logo.png" alt="Vue Grid Layout">
+  </a>
+</p>
+<p align="center">
+<a href="https://www.npmjs.com/package/vue-grid-layout-split">
+<img src="https://img.shields.io/npm/v/vue-grid-layout-split.svg"/> 
+<img src="https://img.shields.io/npm/dm/vue-grid-layout-split.svg"/></a> 
+<a href="https://vuejs.org/"><img src="https://img.shields.io/badge/vue-3.x-brightgreen.svg"/></a>
 </p>
 
 `vue-grid-layout-split`是模仿阿里云控制台布局方式的栅格布局系统, 适用于Vue.js。 
-**灵感源自于 [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout)**
+**灵感源自于 [vue-grid-layout](https://www.npmjs.com/package/vue-grid-layout)** 
 
-### **当前版本:** 1.0.0 (支持 Vue 2.2+)
+### **当前版本:** 1.0.2 (目前仅支持 Vue 3.0+)
 
-### **Vue 2.1.10 及以下请使用 [2.1.3](https://github.com/jbaysolutions/vue-grid-layout/tree/2.1.3)**
-### **Vue 1 请使用 [1.0.3](https://github.com/jbaysolutions/vue-grid-layout/tree/1.0.3)**
 
-<br/>
-
-[在线演示](https://paobai.github.io/vue-grid-layout-split/)
+# [在线演示](https://paobai.github.io/vue-grid-layout-split/)
 
 ## 特性
 

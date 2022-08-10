@@ -1,6 +1,6 @@
 {
   "name": "vue-grid-layout-split",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A draggable layout",
   "main": "lib/vue-grid-layout-split.es.js",
   "module": "lib/vue-grid-layout-split.umd.js",
@@ -13,6 +13,10 @@
     "build:component": "cross-env BUILD_DIST=component vite build",
     "build:html": "cross-env BUILD_DIST=html vite build",
     "build:types": "tsc --emitDeclarationOnly --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paobai/vue-grid-layout-split.git"
   },
   "author": "",
   "license": "ISC",
