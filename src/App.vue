@@ -1,9 +1,9 @@
 <template>
   <div class="App">
-    <div class="top-wrapper">
+    <a class="top-wrapper">
       <img class="logo" src="/logo.png">
-      <span class="title">Vue-Grid-Layout-Split</span>
-    </div>
+      <a class="title" href="https://github.com/paobai/vue-grid-layout-split" target="_blank">Vue-Grid-Layout-Split</a>
+    </a>
     <div class="header-wrapper">
       <div class="control-wrapper">
         <div class="left-wrapper">
